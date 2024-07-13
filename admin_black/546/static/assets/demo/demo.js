@@ -514,212 +514,6 @@ demo = {
 
   },
 
-  initGoogleMaps: function() {
-    var myLatlng = new google.maps.LatLng(40.748817, -73.985428);
-    var mapOptions = {
-      zoom: 13,
-      center: myLatlng,
-      scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
-      styles: [{
-          "elementType": "geometry",
-          "stylers": [{
-            "color": "#1d2c4d"
-          }]
-        },
-        {
-          "elementType": "labels.text.fill",
-          "stylers": [{
-            "color": "#8ec3b9"
-          }]
-        },
-        {
-          "elementType": "labels.text.stroke",
-          "stylers": [{
-            "color": "#1a3646"
-          }]
-        },
-        {
-          "featureType": "administrative.country",
-          "elementType": "geometry.stroke",
-          "stylers": [{
-            "color": "#4b6878"
-          }]
-        },
-        {
-          "featureType": "administrative.land_parcel",
-          "elementType": "labels.text.fill",
-          "stylers": [{
-            "color": "#64779e"
-          }]
-        },
-        {
-          "featureType": "administrative.province",
-          "elementType": "geometry.stroke",
-          "stylers": [{
-            "color": "#4b6878"
-          }]
-        },
-        {
-          "featureType": "landscape.man_made",
-          "elementType": "geometry.stroke",
-          "stylers": [{
-            "color": "#334e87"
-          }]
-        },
-        {
-          "featureType": "landscape.natural",
-          "elementType": "geometry",
-          "stylers": [{
-            "color": "#023e58"
-          }]
-        },
-        {
-          "featureType": "poi",
-          "elementType": "geometry",
-          "stylers": [{
-            "color": "#283d6a"
-          }]
-        },
-        {
-          "featureType": "poi",
-          "elementType": "labels.text.fill",
-          "stylers": [{
-            "color": "#6f9ba5"
-          }]
-        },
-        {
-          "featureType": "poi",
-          "elementType": "labels.text.stroke",
-          "stylers": [{
-            "color": "#1d2c4d"
-          }]
-        },
-        {
-          "featureType": "poi.park",
-          "elementType": "geometry.fill",
-          "stylers": [{
-            "color": "#023e58"
-          }]
-        },
-        {
-          "featureType": "poi.park",
-          "elementType": "labels.text.fill",
-          "stylers": [{
-            "color": "#3C7680"
-          }]
-        },
-        {
-          "featureType": "road",
-          "elementType": "geometry",
-          "stylers": [{
-            "color": "#304a7d"
-          }]
-        },
-        {
-          "featureType": "road",
-          "elementType": "labels.text.fill",
-          "stylers": [{
-            "color": "#98a5be"
-          }]
-        },
-        {
-          "featureType": "road",
-          "elementType": "labels.text.stroke",
-          "stylers": [{
-            "color": "#1d2c4d"
-          }]
-        },
-        {
-          "featureType": "road.highway",
-          "elementType": "geometry",
-          "stylers": [{
-            "color": "#2c6675"
-          }]
-        },
-        {
-          "featureType": "road.highway",
-          "elementType": "geometry.fill",
-          "stylers": [{
-            "color": "#9d2a80"
-          }]
-        },
-        {
-          "featureType": "road.highway",
-          "elementType": "geometry.stroke",
-          "stylers": [{
-            "color": "#9d2a80"
-          }]
-        },
-        {
-          "featureType": "road.highway",
-          "elementType": "labels.text.fill",
-          "stylers": [{
-            "color": "#b0d5ce"
-          }]
-        },
-        {
-          "featureType": "road.highway",
-          "elementType": "labels.text.stroke",
-          "stylers": [{
-            "color": "#023e58"
-          }]
-        },
-        {
-          "featureType": "transit",
-          "elementType": "labels.text.fill",
-          "stylers": [{
-            "color": "#98a5be"
-          }]
-        },
-        {
-          "featureType": "transit",
-          "elementType": "labels.text.stroke",
-          "stylers": [{
-            "color": "#1d2c4d"
-          }]
-        },
-        {
-          "featureType": "transit.line",
-          "elementType": "geometry.fill",
-          "stylers": [{
-            "color": "#283d6a"
-          }]
-        },
-        {
-          "featureType": "transit.station",
-          "elementType": "geometry",
-          "stylers": [{
-            "color": "#3a4762"
-          }]
-        },
-        {
-          "featureType": "water",
-          "elementType": "geometry",
-          "stylers": [{
-            "color": "#0e1626"
-          }]
-        },
-        {
-          "featureType": "water",
-          "elementType": "labels.text.fill",
-          "stylers": [{
-            "color": "#4e6d70"
-          }]
-        }
-      ]
-    };
-
-    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-    var marker = new google.maps.Marker({
-      position: myLatlng,
-      title: "Hello World!"
-    });
-
-    // To add the marker to the map, call setMap();
-    marker.setMap(map);
-  },
-
   showNotification: function(from, align) {
     color = Math.floor((Math.random() * 4) + 1);
 
@@ -945,7 +739,7 @@ demo = {
         titleFontColor: '#333',
         bodyFontColor: '#666',
         bodySpacing: 4,
-        xPadding: 12,
+        // xPadding: 12,
         mode: "nearest",
         intersect: 0,
         position: "nearest"
@@ -960,9 +754,9 @@ demo = {
             zeroLineColor: "transparent",
           },
           ticks: {
-            suggestedMin: 60,
-            suggestedMax: 120,
-            padding: 20,
+            // suggestedMin: 60,
+            // suggestedMax: 120,
+            // padding: 20,
             fontColor: "#9e9e9e"
           }
         }],
@@ -975,7 +769,7 @@ demo = {
             zeroLineColor: "transparent",
           },
           ticks: {
-            padding: 20,
+            // padding: 20,
             fontColor: "#9e9e9e"
           }
         }]
@@ -1241,9 +1035,9 @@ demo = {
           zeroLineColor: "transparent",
         },
         ticks: {
-          suggestedMin: 60,
-          suggestedMax: 120,
-          padding: 20,
+          // suggestedMin: 60,
+          // suggestedMax: 120,
+          // padding: 20,
           fontColor: "#9e9e9e"
         }
       }],
@@ -1256,7 +1050,7 @@ demo = {
           zeroLineColor: "transparent",
         },
         ticks: {
-          padding: 20,
+          // padding: 20,
           fontColor: "#9e9e9e"
         }
       }]
@@ -1322,7 +1116,154 @@ demo = {
   });
 
 
-}
+},
+
+  DrawPie: function(chart_data, chart_labels, chart_id, chart_type) {
+    var ctx = document.getElementById(chart_id).getContext("2d");
+
+    var data = {
+      labels: chart_labels,
+      datasets: [{
+        label: "Data",
+        backgroundColor: [
+          'rgba(72, 72, 176, 0.2)',
+          'rgba(119, 52, 169, 0.2)',
+          'rgba(29, 140, 248, 0.2)',
+          'rgba(225, 78, 202, 0.2)',
+          'rgba(0, 242, 195, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(72, 72, 176, 1)',
+          'rgba(119, 52, 169, 1)',
+          'rgba(29, 140, 248, 1)',
+          'rgba(225, 78, 202, 1)',
+          'rgba(0, 242, 195, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 2,
+        data: chart_data,
+      }]
+    };
+
+    var options = {
+      maintainAspectRatio: false,
+      responsive: true,
+      legend: {
+        display: true,
+        position: 'top',
+        labels: {
+          fontColor: '#9a9a9a'
+        }
+      },
+      tooltips: {
+        backgroundColor: '#f5f5f5',
+        titleFontColor: '#333',
+        bodyFontColor: '#666',
+        bodySpacing: 4,
+        xPadding: 12,
+        mode: "nearest",
+        intersect: 0,
+        position: "nearest"
+      },
+      animation: {
+        animateScale: true,
+        animateRotate: true
+      }
+    };
+
+    if (chart_type === 'line' || chart_type === 'bar') {
+      options.scales = {
+        yAxes: [{
+          barPercentage: 1.6,
+          gridLines: {
+            drawBorder: false,
+            color: 'rgba(29,140,248,0.1)',
+            zeroLineColor: "transparent",
+          },
+          ticks: {
+            padding: 20,
+            fontColor: "#9e9e9e"
+          }
+        }],
+        xAxes: [{
+          barPercentage: 1.6,
+          gridLines: {
+            drawBorder: false,
+            color: 'rgba(29,140,248,0.1)',
+            zeroLineColor: "transparent",
+          },
+          ticks: {
+            padding: 20,
+            fontColor: "#9e9e9e"
+          }
+        }]
+      };
+    }
+
+    var myChart = new Chart(ctx, {
+      type: chart_type,
+      data: data,
+      options: options
+    });
+  },
+
+  Piewithpercentages: function(df) {
+    // Extract the data from the DataFrame
+    var labels = df['Category'].toArray();
+    var counts = df['Count'].toArray();
+    var percentages = df['Percentage'].toArray();
+  
+    // Create the chart
+    var ctx = document.getElementById('chart').getContext('2d');
+    var chart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Sale Orders Breakdown',
+          data: percentages,
+          backgroundColor: [
+            '#4CAF50', // Sale Orders
+            '#8BC34A', // Done Sale Orders
+            '#FF9800', // Cancelled Sale Orders
+            '#009688', // Sale Orders with Invoice
+            '#03A9F4' // Sale Orders to Invoice
+          ],
+          borderColor: [
+            '#4CAF50', // Sale Orders
+            '#8BC34A', // Done Sale Orders
+            '#FF9800', // Cancelled Sale Orders
+            '#009688', // Sale Orders with Invoice
+            '#03A9F4' // Sale Orders to Invoice
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        title: {
+          display: true,
+          text: 'Sale Orders Breakdown'
+        },
+        legend: {
+          display: true,
+          position: 'right'
+        },
+        plugins: {
+          datalabels: {
+            formatter: function(value, ctx) {
+              return ctx.chart.data.labels[ctx.dataIndex] + ': ' + value.toFixed(2) + '%';
+            },
+            color: 'white',
+            font: {
+              weight: 'bold',
+              size: 14
+            }
+          }
+        }
+      }
+    });
+  }
 }
 
 

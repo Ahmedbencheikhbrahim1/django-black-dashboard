@@ -4,11 +4,10 @@
 * Black Dashboard - v1.0.1
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/black-dashboard
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
 
 
-* Coded by Creative Tim
+
+* Coded by TSC
 
 =========================================================
 

@@ -6,13 +6,11 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
      path('', views.dashboard, name='dashboard'),
      path('factures/', views.factures, name='factures'),
-     path('map/', views.map, name='map'),
+     path('HR/', views.HR, name='HR'),
      path('notifications/', views.notifications, name='notifications'),
      path('user-profile/', views.user_profile, name='user_profile'),
      path('formations/', views.formations, name='formations'),
-     path('typography/', views.typography, name='typography'),
-     path('rtl/', views.rtl, name='rtl'),
-     path('upgrade/', views.upgrade, name='upgrade'),
+     path('indexx', views.index, name='index'),
 
      path('accounts/auth-signup/', views.auth_signup, name = 'auth_signup'),
      path('accounts/auth-signin/', views.AuthSignin.as_view(), name='auth_signin'),
@@ -32,6 +30,12 @@ urlpatterns = [
     ), name='password_reset_done'),
     path('accounts/logout/', views.user_logout_view, name='logout'),
     path('all_invoices/', views.all_invoices, name='invoices'),
+    path('login/', views.login, name='login'),
+    path('logout/', views.logout, name='logout'),
+    path('signin/', views.signin, name='auth_signup'),
+    path('sign/', views.sign, name='auth_sign'),
+    path('display_dropdown/', views.display_dropdown, name='display_dropdown'),
+    # Add more paths as needed
 
 
 ]

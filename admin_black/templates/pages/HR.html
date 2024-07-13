@@ -8,8 +8,8 @@
             <div class="card">
                 <div class="card-body">
                     <div class="">
-                    <h3 class="card-title">{{nb_product}} </h3>
-                    <span>Nombre de produits </span>
+                    <h3 class="card-title">{{headcount}} employés</h3>
+                    <span>Nombre d'employés </span>
                     </div>
                 </div>
             </div>
@@ -18,8 +18,8 @@
             <div class="card">
             <div class="card-body">
                 <div class="">
-                <h3 class="card-title">{{chiffreaffaire}} TND</h3>
-                <span>Chiffre d'Affaire </span>
+                <h3 class="card-title">{{department_headcount }} départements</h3>
+                <span>Nombre de départements </span>
                 </div>
             </div>
             </div>
@@ -30,8 +30,8 @@
             <div class="card">
             <div class="card-body">
                 <div class="">
-                    <h3 class="card-title">{{nombreFactures}}</h3>
-                    <span>Nombre de facture</span>
+                    <h3 class="card-title">{{job_title_distribution}} postes </h3>
+                    <span>Types de poste</span>
                     </div>
             </div>
             </div>
@@ -90,11 +90,11 @@
       <div class="col-lg-6">
           <div class="card card-chart">
               <div class="card-header">
-                  <h3 class="card-title"><i class="tim-icons icon-bell-55 text-primary"></i>chiffre d'affaire générée par produit:</h3>
+                  <h3 class="card-title"><i class="tim-icons icon-bell-55 text-primary"></i>chiffre d'affaire générée par employé:</h3>
               </div>
               <div class="card-body">
                   <div class="chart-area">
-                      <canvas id="CA_par_produit1"></canvas>
+                      <canvas id="employe_performance"></canvas>
                   </div>
               </div>
           </div>
@@ -102,11 +102,11 @@
       <div class="col-lg-6">
           <div class="card card-chart">
               <div class="card-header">
-                  <h3 class="card-title"><i class="tim-icons icon-delivery-fast text-info"></i>quantité vendus par produit</h3>
+                  <h3 class="card-title"><i class="tim-icons icon-delivery-fast text-info"></i>chiffre d'affaire générée par departement :</h3>
               </div>
               <div class="card-body">
                   <div class="chart-area">
-                      <canvas id="revenu_produit1"></canvas>
+                      <canvas id="revenu_departement"></canvas>
                   </div>
               </div>
           </div>
@@ -116,11 +116,11 @@
       <div class="col-lg-6">
           <div class="card card-chart">
               <div class="card-header">
-                  <h3 class="card-title"><i class="tim-icons icon-bell-55 text-primary"></i>chiffre d'affaire générée par categorie:</h3>
+                  <h3 class="card-title"><i class="tim-icons icon-bell-55 text-primary"></i>Distribution des postes :</h3>
               </div>
               <div class="card-body">
                   <div class="chart-area">
-                      <canvas id="revenue_by_category"></canvas>
+                      <canvas id="jobs_distribution"></canvas>
                   </div>
               </div>
           </div>
@@ -128,11 +128,11 @@
       <div class="col-lg-6">
           <div class="card card-chart">
               <div class="card-header">
-                  <h3 class="card-title"><i class="tim-icons icon-delivery-fast text-info"></i>quantité vendus par categorie</h3>
+                  <h3 class="card-title"><i class="tim-icons icon-delivery-fast text-info"></i>Distribution des employés par departement:</h3>
               </div>
               <div class="card-body">
                   <div class="chart-area">
-                      <canvas id="total_quantity_sold_category"></canvas>
+                      <canvas id="employe_par_dep"></canvas>
                   </div>
               </div>
           </div>
@@ -169,5 +169,5 @@
         
 
 </div>
-{% include 'includes/scriptformation.html' %}
+{% include 'includes/scriptHR.html' %}
 {% endblock content %}

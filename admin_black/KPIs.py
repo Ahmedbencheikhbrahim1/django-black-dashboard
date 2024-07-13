@@ -86,15 +86,22 @@ def ventes_par_client(invoices_df):
 def top_products_sold(products):
     product_sales = products.groupby('product_name').agg(total_quantity=('quantity', 'sum'))
     top_selling_products = product_sales.sort_values(by='total_quantity', ascending=False)
-    top_selling_products =top_selling_products
-    return top_selling_products
+    top = top_selling_products.head(8)
+    rest = top_selling_products.iloc[5:].sum().to_frame().T
+    rest.index = ['autres']
+    result = pd.concat([top, rest])
+    return result
 
 # revenu par produit
 def Revenu_par_produit(products):
     products['price_unit'] = products['price_unit'].astype(float)
     product_revenue = products.groupby('product_name').agg(total_revenue=('price_unit', lambda x: sum(x * product_details_df.loc[x.index, 'quantity']))).reset_index()
     product_revenue = product_revenue.sort_values(by='total_revenue', ascending=False)
-    return product_revenue
+    top = product_revenue.head(5)
+    rest = product_revenue.iloc[5:].sum().to_frame().T
+    rest['product_name'] = 'autres'
+    result = pd.concat([top, rest])
+    return result
 
 # Operations statut : 
 def CRM_statut(CRM_Stage):
@@ -150,7 +157,12 @@ def nombre_factures(period):
 def ventes_par_clients(invoices_df):
   employee_sales = invoices_df.groupby('partner_name').agg(total_revenue=('amount_total', 'sum')).reset_index()
   employee_sales = employee_sales.sort_values(by='total_revenue', ascending=False).set_index('partner_name')
-  return employee_sales
+  top = employee_sales.head(5)
+  rest = employee_sales.iloc[5:].sum().to_frame().T
+  rest.index = ['autres']
+  
+  result = pd.concat([top, rest])
+  return result
 
 # client sales :
 def client_sales_details(client_name, start_date=None, end_date=None, period="month"):
@@ -219,12 +231,44 @@ def retention_rate_over_time(invoices_df, period):
 
     return retention_rate_series
 
+def visualize_sale_orders_df(sale_orders, done_saleorders, cancelled_sale_orders, sale_orders_with_invoice, sale_orders_to_invoiced):
+    sale_orders = len(sale_orders_ids)
+    done_saleorders = len(done_sale_orders_ids)
+    cancelled_sale_orders = len(cancelled_sale_orders_ids)
+    sale_orders_with_invoice = len(invoiced_sale_orders_ids)
+    sale_orders_to_invoiced = len(to_invoice_sale_orders_ids)
+    
+    total_count = sale_orders + done_saleorders + cancelled_sale_orders + sale_orders_with_invoice + sale_orders_to_invoiced
+
+    # Calculate the percentages
+    sale_orders_percent = (sale_orders / total_count) * 100
+    done_saleorders_percent = (done_saleorders / total_count) * 100
+    cancelled_sale_orders_percent = (cancelled_sale_orders / total_count) * 100
+    sale_orders_with_invoice_percent = (sale_orders_with_invoice / total_count) * 100
+    sale_orders_to_invoiced_percent = (sale_orders_to_invoiced / total_count) * 100
+
+    # Create a DataFrame
+    data = {
+        'Category': ['Sale Orders', 'Done Sale Orders', 'Cancelled Sale Orders', 'Sale Orders with Invoice', 'Sale Orders to Invoice'],
+        'Percentage': [sale_orders_percent, done_saleorders_percent, cancelled_sale_orders_percent, sale_orders_with_invoice_percent, sale_orders_to_invoiced_percent]
+    }
+    df = pd.DataFrame(data)
+
+    return df
 
 #----------------------------------------------------------------------------------------------
 #-----------------------------------Page formation---------------------------
 # commande de joiture : ( à deplacer latter )
 products = pd.merge(joined_df, products_df, left_on='product_id', right_on='id_product', how='left')
 products.drop(columns=['id_product','name','quantity_sold', 'Unnamed: 0_x','uom_id', 'Unnamed: 0_y'], inplace=True)
+
+def nb_fac_(invoices_df):
+  nb_fac_par_client = invoices_df["partner_name"].value_counts()
+  top = nb_fac_par_client.head(5)
+  rest = pd.Series(nb_fac_par_client.iloc[5:].sum(), name='autres').to_frame().T 
+  result = pd.concat([top, rest])
+  return result
+
 
 #Total Revenue par Product ( in data_processing )
 # les produits avec la plus Marge brute : 
@@ -237,3 +281,41 @@ def moins_marge_brute_produits(product):
     product['gross_margin'] = product['amount_total'] - (product['standard_price'] * product['quantity'])
     gross = product.groupby('product_name')['gross_margin'].sum().sort_values(ascending=True).head(10)
     return gross
+
+
+#----------------------------------------------------------------------------------------------
+#-----------------------------------Page HR ---------------------------
+
+def employee_performance(invoices_df, period):
+    invoices_df['date'] = pd.to_datetime(invoices_df['date'])
+    if period == 'year':
+        invoices_df['period'] = invoices_df['date'].dt.year
+        all_periods = pd.Series(range(invoices_df['period'].min(), invoices_df['period'].max() + 1))
+    elif period == 'quarter':
+        invoices_df['period'] = invoices_df['date'].dt.to_period('Q')
+        all_periods = pd.period_range(invoices_df['period'].min(), invoices_df['period'].max(), freq='Q')
+    elif period == 'month':
+        invoices_df['period'] = invoices_df['date'].dt.to_period('M')
+        all_periods = pd.period_range(invoices_df['period'].min(), invoices_df['period'].max(), freq='M')
+    else:
+        raise ValueError("Invalid period. Choose from 'year', 'quarter', or 'onth' ")
+    employee_performance = invoices_df.groupby(['period', 'employee_name'])['amount_total'].sum().reset_index()
+    employee_performance_pivot = employee_performance.pivot(index='period', columns='employee_name', values='amount_total')
+    employee_performance_pivot.fillna(0, inplace=True)
+    #employee_performance_pivot = employee_performance_pivot.reindex(all_periods, fill_value=0)
+    return employee_performance_pivot
+
+# revenu par departement :
+def revenu_dep(invoices_df,employee_data):
+  joined_data = pd.merge(invoices_df[['amount_total', 'employee_name']], employee_data[['name', 'department_name']], left_on='employee_name', right_on='name', how='outer')
+  employee_performance = joined_data.groupby('department_name')['amount_total'].sum().reset_index().sort_values('amount_total', ascending=False)
+  return employee_performance
+
+def display_dropdown(invoices_df):
+    try:
+        df = invoices_df
+        partner_names = df['partner_name'].tolist()
+    except Exception as e:
+        partner_names = []  # Handle error or return empty list
+
+    return partner_names

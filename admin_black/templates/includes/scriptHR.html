@@ -4,6 +4,7 @@
 <script src="{% static 'assets/js/core/popper.min.js' %}"></script>
 <script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
 <script src="{% static 'assets/js/plugins/perfect-scrollbar.jquery.min.js' %}"></script>
+<!--  Google Maps Plugin    -->
 <!-- Chart JS -->
 <script src="{% static 'assets/js/plugins/chartjs.min.js' %}"></script>
 <!--  Notifications Plugin    -->
@@ -15,35 +16,22 @@
 <script src="{% static 'assets/js/themeSettings.js' %}"></script>
 
 <script>
-    $(document).ready(function () {
-        // Javascript method's body can be found in assets/js/demos.js
+
         var month_names = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
 
         demo.drawX({{ca_mois.data|safe}}, month_names ,'{{ca_mois.id}}','{{ca_mois.type}}' , {{ca_quarter.data|safe}},  
         {{ca_year.data|safe}} ,{{ca_quarter.labels|safe}},  {{ca_year.labels|safe}});
 
-        // demo.DrawChart( {{crm_statut.data|safe}}, {{crm_statut.labels|safe}}, 
-        // '{{crm_statut.id}}','{{crm_statut.type}}');
-        // demo.DrawChart( {{ca_par_employee.data|safe}}, {{ca_par_employee.labels|safe}}, 
-        // '{{ca_par_employee.id}}','{{ca_par_employee.type}}');
-        // demo.DrawChart( {{employee_sales.data|safe}}, {{employee_sales.labels|safe}}, 
-        // '{{employee_sales.id}}','{{employee_sales.type}}');
-        // demo.DrawChart( {{revenu_produit.data|safe}}, {{revenu_produit.labels|safe}}, 
-        // '{{revenu_produit.id}}','{{revenu_produit.type}}');  
-
-        // demo.DrawChart( {{ca_par_produit.data|safe}}, {{ca_par_produit.labels|safe}}, 
-        // '{{ca_par_produit.id}}','{{ca_par_produit.type}}');  
         //----------------------------------------------------------------
-        demo.DrawChart({{ca_par_produit1.data|safe}},{{ca_par_produit1.labels|safe}},'{{ca_par_produit1.id}}','{{ca_par_produit1.type}}');
-        demo.DrawChart({{revenu_produit1.data|safe}},{{revenu_produit1.labels|safe}},'{{revenu_produit1.id}}','{{revenu_produit1.type}}');
-        demo.DrawChart({{revenue_by_category.data|safe}},{{revenue_by_category.labels|safe}},'{{revenue_by_category.id}}','{{revenue_by_category.type}}');
-        demo.DrawChart({{total_quantity_sold_category.data|safe}},{{total_quantity_sold_category.labels|safe}},'{{total_quantity_sold_category.id}}','{{total_quantity_sold_category.type}}');
+        demo.DrawChart({{employe_performance.data|safe}},{{employe_performance.labels|safe}},'{{employe_performance.id}}','{{employe_performance.type}}');
+        demo.DrawChart({{employe_par_dep.data|safe}},{{employe_par_dep.labels|safe}},'{{employe_par_dep.id}}','{{employe_par_dep.type}}');
+        demo.DrawChart({{jobs_distribution.data|safe}},{{jobs_distribution.labels|safe}},'{{jobs_distribution.id}}','{{jobs_distribution.type}}');
+        demo.DrawChart({{revenu_departement.data|safe}},{{revenu_departement.labels|safe}},'{{revenu_departement.id}}','{{revenu_departement.type}}');
         demo.DrawChart({{plus_marge_brutes.data|safe}},{{plus_marge_brutes.labels|safe}},'{{plus_marge_brutes.id}}','{{plus_marge_brutes.type}}');
         demo.DrawChart({{moins_marge_brutes.data|safe}},{{moins_marge_brutes.labels|safe}},'{{moins_marge_brutes.id}}','{{moins_marge_brutes.type}}');
-
         
 
-    });
 </script>
 
 

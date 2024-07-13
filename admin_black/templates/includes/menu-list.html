@@ -19,18 +19,18 @@
       <p>Formations</p>
     </a>
   </li>
-  <li class="{% if 'map' in segment %} active {% endif %}">
-    <a href="{% url 'map' %}">
+  <li class="{% if 'HR' in segment %} active {% endif %}">
+    <a href="{% url 'HR' %}">
       <i class="tim-icons icon-components"></i>
-      <p>map</p>
+      <p>HR analysis</p>
     </a>
   </li>
 
   {% if request.user.is_authenticated and not request.user.is_superuser %}
-  <li class="{% if 'map' in segment %} active {% endif %}">
-    <a href="{% url 'map' %}">
+  <li class="{% if 'HR' in segment %} active {% endif %}">
+    <a href="{% url 'HR' %}">
       <i class="tim-icons icon-pin"></i>
-      <p>Maps</p>
+      <p>HR analysis</p>
     </a>
   </li>
   <li class="{% if 'notifications' in segment %} active {% endif %}">

@@ -18,8 +18,7 @@
 <script src="{% static 'assets/js/themeSettings.js' %}"></script>
 
 <script>
-    console.log({{employee_sales.data|safe}}, {{employee_sales.labels|safe}}, 
-    '{{employee_sales.id}}','{{employee_sales.type}}')
+
     $(document).ready(function () {
         // Javascript method's body can be found in assets/js/demos.js
         var month_names = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -44,14 +43,15 @@
         //demo.DrawChart( {{revenu_produit.data|safe}}, {{revenu_produit.labels|safe}}, 
         //'{{revenu_produit.id}}','{{revenu_produit.type}}');  
 
-        demo.DrawChart( {{ca_par_produit.data|safe}}, {{ca_par_produit.labels|safe}}, 
-        '{{ca_par_produit.id}}','{{ca_par_produit.type}}');  
+        demo.DrawPie( {{crm_statut.data|safe}}, {{crm_statut.labels|safe}}, 
+        '{{crm_statut.id}}','{{crm_statut.type}}');
+        demo.DrawPie( {{command_statut.data|safe}}, {{command_statut.labels|safe}}, 
+        '{{command_statut.id}}','{{command_statut.type}}'); 
         // demo.DrawChart( {{client.data|safe}}, {{client.labels|safe}}, 
         //  '{{client.id}}','{{client.type}}');
 
         // demo.DrawChart( {{facture_mois.data|safe}}, {{facture_mois.labels|safe}}, 
         // '{{facture_mois.id}}','{{facture_mois.type}}');
-
         demo.DrawChart({{MOINS_revenue_par_client.data|safe}},{{MOINS_revenue_par_client.labels|safe}},'{{MOINS_revenue_par_client.id}}','{{MOINS_revenue_par_client.type}}');
         demo.DrawChart({{TOP_revenue_par_client.data|safe}},{{TOP_revenue_par_client.labels|safe}},'{{TOP_revenue_par_client.id}}','{{TOP_revenue_par_client.type}}');
 

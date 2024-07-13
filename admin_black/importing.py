@@ -14,7 +14,7 @@ def dataimporting():
   return invoices_df , product_details_df ,joined_df, products_df , CRM_tag, CRM_Stage, CRM_Team, CRM_lead , employee_data
 
 invoices_df , product_details_df ,joined_df, products_df , CRM_tag, CRM_Stage, CRM_Team, CRM_lead , employee_data = dataimporting()
-print(invoices_df)
+invoices_df = invoices_df.drop(columns='Unnamed: 0').set_index('id_invoice')
 
 def ordersimporting():
   quotes_ids = pd.read_excel(open('orders.xlsx', 'rb'),sheet_name='quotes_ids')

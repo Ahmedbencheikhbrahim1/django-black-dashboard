@@ -32,16 +32,18 @@ class RegistrationForm(UserCreationForm):
       })
     }
 
-class LoginForm(AuthenticationForm):
-    username = UsernameField(widget=forms.TextInput(attrs={
-        'class': 'form-control',
-        'placeholder': 'Username'
-    }))
-    password = forms.CharField(max_length=50, widget=forms.PasswordInput(attrs={
-        'class': 'form-control',
-        'placeholder': 'Password'
-    }))
-
+# class LoginForm(AuthenticationForm):
+#     username = UsernameField(widget=forms.TextInput(attrs={
+#         'class': 'form-control',
+#         'placeholder': 'Username'
+#     }))
+#     password = forms.CharField(max_length=50, widget=forms.PasswordInput(attrs={
+#         'class': 'form-control',
+#         'placeholder': 'Password'
+#     }))
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=100)
+    password = forms.CharField(widget=forms.PasswordInput)
 
 class UserPasswordResetForm(PasswordResetForm):
   email = forms.EmailField(widget=forms.EmailInput(attrs={

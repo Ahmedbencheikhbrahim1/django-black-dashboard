@@ -9,10 +9,10 @@ from .data_processing import *
 from .data_processing import CA_mois , CA_quarter , CA_year
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login, logout as auth_logout
 from .importing import *
-
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.views import View
 # def login(request):
 #     if request.method == 'POST':
 #         form = AuthenticationForm(request, request.POST)
@@ -25,43 +25,44 @@ from .importing import *
 #         form = AuthenticationForm()
 
 #     return render(request, 'auth/login.html', {'form': form})
+
 def login(request):
     if request.method == 'POST':
-        form = LoginForm(request.POST)
+        # username = request.POST.get('username')
+        # username = request.POST.get('password')
+        # print(username)
+        form = AuthenticationForm(request, data=request.POST)
+        print(form.is_valid())
         if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-
-            # Dummy authentication logic (replace with your own logic)
-            if username == 'admin' and password == 'password':
-                # Simulate login success
+            print("here")
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                auth_login(request, user)
                 messages.info(request, f"You are now logged in as {username}.")
-                return redirect('factures')  # Replace 'factures' with your actual URL name for invoices
+                return redirect('/') 
             else:
                 messages.error(request, 'Invalid username or password.')
+        else:
+            messages.error(request, 'Invalid username or password.')
     else:
-        form = LoginForm()
+        form = AuthenticationForm()
+    return render(request, 'accounts/auth-signin.html', {'form': form})
 
-    return render(request, 'auth/login.html', {'form': form})
-def signin(request):
+def signup(request):
     if request.method == 'POST':
-        form = LoginForm(request.POST)
+        form = UserCreationForm(request.POST)
         if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-
-            # Dummy authentication logic (replace with your own logic)
-            if username == 'admin' and password == 'password':
-                # Simulate login success
-                messages.info(request, f"You are now logged in as {username}.")
-                return redirect('factures')  # Replace 'factures' with your actual URL name for invoices
-            else:
-                messages.error(request, 'Invalid username or password.')
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f"Account created for {username}!")
+            return redirect('login')
+        else:
+            messages.error(request, 'Failed to create account. Please correct the error below.')
     else:
-        form = LoginForm()
-
-    return render(request, 'auth/auth-signin.html', {'form': form})
-
+        form = UserCreationForm()
+    return render(request, 'accounts/auth-signup.html', {'form': form})
 def sign(request):
     context = {
     'parent': 'auth',
@@ -73,7 +74,7 @@ def sign(request):
 def logout(request):
     auth_logout(request)
     messages.info(request, "You have been logged out.")
-    return redirect('login')  # Redirect to the homepage or login page
+    return redirect('login')  
 def auth_signup(request):
   if request.method == 'POST':
       form = RegistrationForm(request.POST)
@@ -88,10 +89,11 @@ def auth_signup(request):
   context = {'form': form}
   return render(request, 'accounts/auth-signup.html', context)
 
-class AuthSignin(auth_views.LoginView):
-  template_name = 'accounts/auth-signin.html'
+def AuthSignin(request):
+  return render(request,'accounts/auth-signin.html',context={})
   form_class = LoginForm
   success_url = '/'
+  
 
 class UserPasswordResetView(auth_views.PasswordResetView):
   template_name = 'accounts/forgot-password.html'
@@ -112,7 +114,7 @@ class UserPasswordResetConfirmView(auth_views.PasswordResetConfirmView):
 def user_logout_view(request):
   logout(request)
   return redirect('/accounts/auth-signin/')
-
+@login_required(login_url='/accounts/auth-signin')
 # Pages -- Dashboard
 def dashboard(request):
     context = {
@@ -174,7 +176,7 @@ def index(request):
         'form': form,
     }
     return render(request, 'auth-signin.html', context)
-# @login_required(login_url='/accounts/auth-signin')
+@login_required(login_url='/accounts/auth-signin')
 def factures(request):
     context = {
     'parent': 'pages',
@@ -215,7 +217,7 @@ def factures(request):
     }
     return render(request, 'pages/factures.html', context)
 
-# @login_required(login_url='/accounts/auth-signin')
+@login_required(login_url='/accounts/auth-signin')
 def HR(request):
     context = {
     'parent': 'pages',

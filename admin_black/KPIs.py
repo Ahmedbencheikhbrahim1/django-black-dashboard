@@ -258,7 +258,7 @@ def visualize_sale_orders_df(sale_orders, done_saleorders, cancelled_sale_orders
 
 #----------------------------------------------------------------------------------------------
 #-----------------------------------Page formation---------------------------
-# commande de joiture : ( à deplacer latter )
+# commande de joiture : ( à deplacer later )
 products = pd.merge(joined_df, products_df, left_on='product_id', right_on='id_product', how='left')
 products.drop(columns=['id_product','name','quantity_sold', 'Unnamed: 0_x','uom_id', 'Unnamed: 0_y'], inplace=True)
 

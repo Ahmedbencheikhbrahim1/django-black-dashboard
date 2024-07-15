@@ -26,7 +26,7 @@
     </a>
   </li>
 
-  {% if request.user.is_authenticated and not request.user.is_superuser %}
+  {% if request.user.is_authenticated and request.user.is_superuser %}
   <li class="{% if 'HR' in segment %} active {% endif %}">
     <a href="{% url 'HR' %}">
       <i class="tim-icons icon-pin"></i>
@@ -63,11 +63,11 @@
       <p>Upgrade to PRO</p>
     </a>
   </li>
+  {% endif %}
   <li>
     <a href="{% url 'logout' %}">
       <i class="tim-icons icon-button-power"></i>
       <p>Logout</p>
     </a>
   </li>
-  {% endif %}
 </ul>
